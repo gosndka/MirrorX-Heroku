@@ -30,5 +30,6 @@ class _BotCommands:
         self.WatchCommand = getCommand('WATCH_COMMAND', 'watch')
         self.TarWatchCommand = getCommand('TARWATCH_COMMAND', 'tarwatch')
         self.deleteCommand = getCommand('DELETE_COMMAND', 'del')
+        self.ByPassCommand = getCommand('BYPASS_COMMAND', 'bypass')
 
 BotCommands = _BotCommands()
