@@ -43,14 +43,14 @@ def stats(update, context):
 
 def start(update, context):
     start_string = f'''
-This is a bot which can mirror all your links to Google drive!
+⫸ This is a bot which can mirror all your links to Google drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     sendMessage(start_string, context.bot, update)
 
 
 def restart(update, context):
-    restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
+    restart_message = sendMessage("⫸ Restarting, Please wait!", context.bot, update)
     # Save restart message ID and chat ID in order to edit it after restarting
     with open(".restartmsg", "w") as f:
         f.truncate(0)
@@ -61,9 +61,9 @@ def restart(update, context):
 
 def ping(update, context):
     start_time = int(round(time.time() * 1000))
-    reply = sendMessage("Starting Ping", context.bot, update)
+    reply = sendMessage("⫸ Starting Ping", context.bot, update)
     end_time = int(round(time.time() * 1000))
-    editMessage(f'{end_time - start_time} ms', reply)
+    editMessage(f'⫸ {end_time - start_time} ms', reply)
 
 
 def log(update, context):
@@ -110,7 +110,7 @@ def main():
     if os.path.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
+        bot.edit_message_text("⫸ Restarted successfully!", chat_id, msg_id)
         os.remove(".restartmsg")
 
     start_handler = CommandHandler(BotCommands.StartCommand, start,

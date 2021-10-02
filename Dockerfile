@@ -9,7 +9,7 @@ RUN if [ "$(uname -m)" = "aarch64" ] ; then \
     fi && \
     sed -i 's/main/main non-free/g' /etc/apt/sources.list && \
     apt-get -qq update && \
-    apt-get -qq install -y tzdata curl aria2 p7zip-full p7zip-rar wget xz-utils libmagic-dev gcc && \
+    apt-get -qq install -y tzdata curl aria2 p7zip-full p7zip-rar wget xz-utils libmagic-dev gcc unzip && \
     apt-get -y autoremove && rm -rf /var/lib/apt/lists/* && apt-get clean && \
     wget -q https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-${HOST_CPU_ARCH}-static.tar.xz && \
     tar -xf ff*.tar.xz && rm -rf *.tar.xz && \
@@ -19,7 +19,8 @@ RUN if [ "$(uname -m)" = "aarch64" ] ; then \
     pip3 install --no-cache-dir MirrorX && \
     apt-get purge -yqq gcc && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* && apt-get clean
 
+COPY . /app
 WORKDIR /app
 
-CMD ["MirrorX"]
+CMD ["bash","start.sh"]
 

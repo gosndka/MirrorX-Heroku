@@ -11,7 +11,7 @@ from telegram.ext import CallbackContext, Filters, CommandHandler
 
 def speedtst(update, context):
     message = update.effective_message
-    ed_msg = message.reply_text("Running Speed Test . . . 💨")
+    ed_msg = message.reply_text("⫸ Running Speed Test . . . 💨")
     test = speedtest.Speedtest()
     test.get_best_server()
     test.download()
@@ -19,13 +19,13 @@ def speedtst(update, context):
     test.results.share()
     result = test.results.dict()
     context.bot.editMessageText(
-        "🔻 Download Speed : "
+        "Download Speed : "
         f"{speed_convert(result['download'])}\n"
-        "🔺 Upload Speed : "
+        "Upload Speed : "
         f"{speed_convert(result['upload'])}\n"
-        "📶 Ping : "
+        "Ping : "
         f"{result['ping']}\n"
-        "🏬 ISP : "
+        "ISP : "
         f"{result['client']['isp']}",
         update.effective_chat.id,
         ed_msg.message_id,

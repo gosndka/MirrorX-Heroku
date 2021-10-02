@@ -137,7 +137,7 @@ class MirrorListener(listeners.MirrorListeners):
             uname = f"@{self.message.from_user.username}"
         else:
             uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
-        msg = f"{uname} your download has been stopped due to: {error}"
+        msg = f"⫸ {uname} your download has been stopped due to: {error}"
         sendMessage(msg, self.bot, self.update)
         if count == 0:
             self.clean()
@@ -152,7 +152,7 @@ class MirrorListener(listeners.MirrorListeners):
 
     def onUploadComplete(self, link: str, size):
         with download_dict_lock:
-            msg = f'<b>Name:- </b><code>{download_dict[self.uid].name()}</code>\n<b>Size:- </b><code>{size}</code>'
+            msg = f'⫸ <code>{download_dict[self.uid].name()}</code> [{size}]'
             buttons = button_build.ButtonMaker()
             if SHORTENER is not None and SHORTENER_API is not None:
                 surl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={link}&format=text').text
@@ -268,7 +268,7 @@ def _mirror(bot, update, isTar=False, extract=False):
     else:
         tag = None
     if not bot_utils.is_url(link) and not bot_utils.is_magnet(link):
-        sendMessage('No download source provided', bot, update)
+        sendMessage('⫸ No download source provided', bot, update)
         return
 
     try:
@@ -297,7 +297,7 @@ def _mirror(bot, update, isTar=False, extract=False):
 
     elif bot_utils.is_mega_link(link) and MEGA_KEY is not None:
         if BLOCK_MEGA_LINKS:
-            sendMessage("Mega Links Are Blocked.", bot, update)
+            sendMessage("⫸ Mega Links Are Blocked.", bot, update)
         else:
             mega_dl = MegaDownloader(listener)
             mega_dl.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}/')
