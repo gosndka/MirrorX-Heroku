@@ -15,6 +15,11 @@ msg_txt = """
 def lv_bypass(update,context):
     try:
         link = update.message.text.split(' ',maxsplit=1)[1]
+        extra_domains = ["linkvertise.com" , "link-to.net" , "direct-link.net" , "up-to-down.net" , "filemedia.net" , "file-link.net"]
+        if not 'linkvertise' in link:
+            for i in extra_domains:
+                if i in link:
+                    link = link.replace(i, "linkvertise.net")
         LOGGER.info(f"Bypassing Link Vertise: {link}")
         reply = sendMessage('⫸ Bypassing..... Please wait!', context.bot, update)
         _apiurl = f"https://bypass.bot.nu/bypass2?url={link}"
